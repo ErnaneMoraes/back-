@@ -1,0 +1,45 @@
+### Configurações locais
+@baseUrl = http://localhost:8080
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6MSwiaWF0IjoxNzQ0NTgxODIxLCJleHAiOjE3NDQ2MjUwMjF9.NtUP5ImeYdFJO1fZg1E5gmczo7FqVSm_CS6zGPKmtcY
+
+### Teste de Login
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+    "login": "ernane",
+    "senha": "Unileste"
+}
+
+### DELETE USUÁRIOS - Deletar usuários (requer token)
+DELETE {{baseUrl}}/usuarios/85
+Content-Type: application/json
+x-access-token: {{token}}
+
+### GET USUÁRIOS - Listar usuários (requer token)
+GET {{baseUrl}}/usuarios
+Content-Type: application/json
+x-access-token: {{token}}
+
+### PUT USUÁRIOS - Altera usuários (requer token)
+PUT {{baseUrl}}/usuarios/77
+Content-Type: application/json
+x-access-token: {{token}}
+
+{
+  "nome": "Ernane",
+  "login": "ernane.moraes",
+  "nivelAcesso": 1
+}
+
+### CRIAR USUARIO
+POST {{baseUrl}}/usuarios
+Content-Type: application/json
+x-access-token: {{token}}
+
+{
+  "nome": "João Silva",
+  "login": "joao.silva",
+  "senha": "123456",
+  "nivelAcesso": "1"
+}

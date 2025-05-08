@@ -1,0 +1,54 @@
+### Configurações globais
+@baseUrl = http://localhost:8080/api/pessoas
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6MSwiaWF0IjoxNzQ1MzYwNDU5LCJleHAiOjE3NDU0MDM2NTl9.QC5GninjSrpPYYn02Nv3gNCKAR3YhWojeV0TdGTN1Js
+@contentType = application/json
+
+### Criar pessoa
+POST {{baseUrl}}/
+Content-Type: {{contentType}}
+x-access-token: {{token}}
+
+{
+  "nome": "Caua Teste",
+  "celular": "22213141123",
+  "cpfCnpj": "2412412141",
+  "rua": "Rua das Flores",
+  "cep": "12345678",
+  "numero": "235",
+  "bairro": "Centro",
+  "cidade": "Belo Horizonte",
+  "uf": "MG"
+}
+
+### Listar pessoas
+GET {{baseUrl}}/
+Content-Type: {{contentType}}
+x-access-token: {{token}}
+
+### Buscar pessoa por ID
+@personId = 3
+GET {{baseUrl}}/{{personId}}
+Content-Type: {{contentType}}
+x-access-token: {{token}}
+
+
+### PUT Pessoa - Altera pessoa (requer token)
+PUT {{baseUrl}}/21
+Content-Type: {{contentType}}
+
+{
+  "nome": "Caua Teste",
+  "celular": "22213141123",
+  "cpfCnpj": "2412412141",
+  "rua": "Rua das Flores",
+  "cep": "12345678",
+  "numero": "235",
+  "bairro": "Centro",
+  "cidade": "Belo Horizonte",
+  "uf": "MG"
+}
+
+### DELETE USUÁRIOS - Deletar usuários (requer token)
+DELETE {{baseUrl}}/{{personId}}
+Content-Type: {{contentType}}
+x-access-token: {{token}}
