@@ -55,7 +55,7 @@ class Pedido {
 
             await this.connection.execute(
                 `UPDATE tb_produto 
-                 SET QUANTIDADE_ESTOQUE = QUANTIDADE_ESTOQUE - ? 
+                 SET QUANTIDADE = QUANTIDADE - ? 
                  WHERE ID_PRODUTO_PK = ?`,
                 [produto.quantidade, produto.idProduto]
             );
@@ -95,7 +95,7 @@ class Pedido {
                     const { ID_PRODUTO_FK, QUANTIDADE } = pedido[0];
                     await this.connection.execute(
                         `UPDATE tb_produto 
-                         SET QUANTIDADE_ESTOQUE = QUANTIDADE_ESTOQUE + ? 
+                         SET QUANTIDADE = QUANTIDADE + ? 
                          WHERE ID_PRODUTO_PK = ?`,
                         [QUANTIDADE, ID_PRODUTO_FK]
                     );

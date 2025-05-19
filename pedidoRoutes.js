@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Pedido = require('./src/models/Pedido');
-const pool = require('./database');
+const { pool } = require('./database');
 
 const validarPedido = (req, res, next) => {
     const { idPessoa, listaItens, formaPgto, parcelas } = req.body;
