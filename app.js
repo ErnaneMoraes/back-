@@ -25,15 +25,18 @@ const PORT = process.env.PORT || 8080;
 connectDB();
 
 // CORS manual para garantir funcionamento no Cloud Run
-const corsOptions = {
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token'],
-  credentials: true,
-};
+// const corsOptions = {
+//   origin: '*',
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token'],
+//   credentials: true,
+// };
 
 //app.use(cors(corsOptions));
 //app.options('*', cors(corsOptions));
+
+app.use(cors());
+app.options('*', cors());
 
 app.options('/usuarios/:id', cors(corsOptions)); 
 
@@ -63,7 +66,7 @@ function verifyJWT(req, res, next) {
 }
 
 // Rotas principais
-app.options('/api/*', cors(corsOptions));
+//app.options('/api/*', cors(corsOptions));
 
 app.use('/api', usuarioRoutes);
 app.use('/api/pedidos', pedidoRoutes);
