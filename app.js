@@ -26,7 +26,7 @@ connectDB();
 
 // CORS manual para garantir funcionamento no Cloud Run
 const corsOptions = {
-  origin: 'https://sistemaaraleve.shop',
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token'],
   credentials: true,
