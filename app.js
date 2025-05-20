@@ -32,10 +32,11 @@ const corsOptions = {
   credentials: true,
 };
 
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
+//app.options('*', cors(corsOptions));
 
 app.options('/usuarios/:id', cors(corsOptions)); 
-app.options('*', cors(corsOptions));
+
 
 
 // app.use((req, res, next) => {
@@ -62,6 +63,8 @@ function verifyJWT(req, res, next) {
 }
 
 // Rotas principais
+app.options('/api/*', cors(corsOptions));
+
 app.use('/api', usuarioRoutes);
 app.use('/api/pedidos', pedidoRoutes);
 app.use('/api/itens', itemRoutes);
