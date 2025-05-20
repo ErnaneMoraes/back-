@@ -38,7 +38,8 @@ connectDB();
 app.use(cors());
 app.options('*', cors());
 
-app.options('/usuarios/:id', cors(corsOptions)); 
+//app.options('/usuarios/:id', cors(corsOptions)); Com esse funciona
+app.options('/usuarios/:id'); 
 
 
 
@@ -78,7 +79,8 @@ app.use('/api/pessoas', pessoaRoutes);
 app.use('/sistema', verifyJWT, express.static(path.join(__dirname, 'sistema_aralev-master')));
 
 // Rota OPTIONS explícita para evitar bloqueios
-app.options('/usuarios/:id', cors(corsOptions));
+//app.options('/usuarios/:id', cors(corsOptions)); com esse funciona
+app.options('/usuarios/:id');
 
 // GET usuários
 app.get("/usuarios", verifyJWT, async (req, res) => {
@@ -120,7 +122,8 @@ app.post("/usuarios", verifyJWT, async (req, res) => {
 
 // PUT usuário
 //app.put("/usuarios/:id", cors(corsOptions), verifyJWT, async (req, res) => {
-  app.put("/usuarios/:id", cors(corsOptions), async (req, res) => {
+  //app.put("/usuarios/:id", cors(corsOptions), async (req, res) => { com esse funciona
+  app.put("/usuarios/:id", async (req, res) => {  
   const id = req.params.id;
   const { nome, login, senha, nivelAcesso } = req.body;
 
