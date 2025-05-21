@@ -1,0 +1,112 @@
+<nav id="sidebar">
+    <!-- Botão para expandir o menu lateral -->
+    <button id="open_btn">
+        <img id="open_btn_icon" class="menu_expansivel" src="assets/Menu.png" alt="Icone">
+    </button>
+
+    <div id="user">
+        <img src="assets/Perfil.png" id="user_avatar" alt="avatar">
+        
+    </div>
+
+    <div id="sidebar_content">
+        <ul id="side-items">
+            <li class="side-item ">
+                <a href="inicio.html" class="side-link " data-tooltip="Página Inicial">
+                    <img src="assets/home_black.png" ></img>
+                    <span class="item-description">
+                        Página Principal
+                    </span>
+                </a>
+            </li>
+            <li class="side-item">
+                <a href="pedido.html" class="side-link " >
+                    <img src="assets/vendas_black.png"></img>
+                    <span class="item-description">
+                        Vendas
+                    </span>
+                </a>
+                <ul>
+                    <li class="side-item">
+                        <a href="pedido.html" class="side-link">
+                            <img src="assets/Pedidos.png" class="sub-img" data-tooltip="Pedidos"></img>
+                            <span class="item-description">
+                                Emissão de Pedidos
+                            </span>
+                        </a>
+                    </li>
+                    <li class="side-item">
+                        <a href="consultaPedidos.html" class="side-link" data-tooltip="Consulta de Pedidos">
+                            <img src="assets/filtro.png" class="sub-img"></img>
+                            <span class="item-description">
+                                Consulta de Pedidos
+                            </span>
+                        </a>
+                    </li>
+                    <li class="side-item">
+                        <a href="clientes.html" class="side-link" data-tooltip="Cadastro de Clientes">
+                            <img src="assets/novo-cliente.png" class="sub-img"></img>
+                            <span class="item-description">
+                                Cadastro de Clientes
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="side-item">
+                <a href="#" class="side-link" data-tooltip="Estoque">
+                    <img src="assets/estoque.png"></img>
+                    <span class="item-description">
+                        Estoque de Produtos
+                    </span>
+                </a>
+                <ul>
+                    <li class="side-item">
+                        <a href="cad_produto.html" class="side-link">
+                            <img src="assets/cadastro.png" class="sub-img" data-tooltip="Pedidos"></img>
+                            <span class="item-description">
+                                Cadastro
+                            </span>
+                        </a>
+                    </li>
+                    <li class="side-item">
+                        <a href="estoqueProdutos.html" class="side-link" data-tooltip="Consulta de Pedidos">
+                            <img src="assets/estoqueProduto.png" class="sub-img"></img>
+                            <span class="item-description">
+                                Estoque
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="side-item">
+                <a href="adm.html" class="side-link" data-tooltip="Administrador">
+                    <img src="assets/Adm.png"></img>
+                    <span class="item-description">
+                        Administrador
+                    </span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+    <!-- Botão de configurações -->
+    <div id="config">
+        <button id="config_btn">
+            <img src="assets/config.png"></img>
+            <span class="item-description">
+                Configurações
+            </span>
+        </button>
+
+        <!-- Botão de Logout
+        <button id="logout_btn">
+            <img src="assets/Sair-50.png"></img>
+            <span class="item-description">Sair</span>
+        </button> -->
+    </div>
+
+    <script src="javascript/sidebar.js"></script>
+</nav>

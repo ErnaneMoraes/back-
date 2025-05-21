@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pedidos.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/popUp.css">
+    <link rel="stylesheet" href="css/cadClientes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ysabeau+Infant&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <title>Pedidos</title>
+</head>
+<body>
+    <!-- Insere a sidebar na página -->
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(html => {
+                document.body.insertAdjacentHTML('afterbegin', html);
+
+                // Agora que a sidebar foi carregada, adicionamos os eventos
+                adicionarEventosSidebar();
+            });
+    </script>
+    <main>
+        <header>
+            <div class="cabecalho">
+                <div class="div-oculta"></div>
+                <img src="assets/Logo.png" alt="Logo">
+                <div class="container-modulos">
+                    <img src="assets/Modulos.png" alt="Modulos">
+                    <img src="assets/Notificações.png" alt="Notificações">
+                    <div class="perfil">
+                        <img src="assets/Perfil.png" alt="Foto de Perfil">
+                        <div class="perfil-descricao">
+                            <p>Admin</p>
+                            <p>Desenvolvedor</p>
+                            <div class="submenu">
+                                <a href="#">Configurações</a>
+                                <a href="#" onclick="logout()">Sair</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="secao-indicadores estoque-indicadores">
+            <div class="container-indicadores">
+                <div class="container-navegacao">
+                    <div class="navegacao">
+                        <img src="assets/Home1.png" alt="Home">
+                        <p>Clientes <strong>></strong> Cadastro </p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Seção do formulário de cadastro de clientes -->
+        <div class="secao-cadastro">
+            <div class="container-cad-clientes">
+                <div class="frm_titulo">
+                    <img src="assets/clientes.png" alt="Clientes">
+                        <h1>CADASTRO DE CLIENTES</h1>
+                </div>
+                <!-- <div class="container-novo-cliente">
+                    <div class="novo-cliente">
+                        <button>
+                            Novo Cliente
+                        </button>
+                    </div>
+                </div> -->
+                <!-- Formulário de cadastro de clientes -->
+                <form action="#" method="post">
+                    <fieldset>
+                        <legend>Dados do cliente</legend>
+                        <div class="linha"></div>
+                        <div class="info-produtos">
+                            <div class="campo-cad tamanho-personalizado">
+                                <label>Nome Completo</label>
+                                <input type="text" name="nome_cliente" placeholder="Digite o nome completo do cliente" required>
+                            </div>
+                            <div class="campo-cad">
+                                <label>Celular</label>
+                                <input type="tel" name="num_celular" placeholder="(xx) x xxxx-xxxx" required>
+                            </div>
+                            <div class="campo-cad">
+                                <label>CPF/CNPJ</label>
+                                <input type="text" name="cpf_ou_cnpj" placeholder="xxx.xxx.xxx-xx" required>
+                            </div>
+                            <div class="campo-cad">
+                                <label>Rua</label>
+                                <input type="text" name="nome_rua" placeholder="Nome da rua" required>
+                            </div>
+                            <div class="campo-cad">
+                                <label>Número</label>
+                                <input type="text" name="numero_casa" placeholder="Ex.: 10" required>
+                            </div>
+                            <div class="campo-cad">
+                                <label>CEP</label>
+                                <input type="text" name="cep" placeholder="Ex.: 35920-000" required>
+                            </div>
+                            <div class="campo-cad">
+                                <label>Cidade</label>
+                                <input type="text" name="cidade" placeholder="Nome da cidade" required>
+                            </div>
+                            <div class="campo-cad">
+                                <label>UF</label>
+                                <input type="text" name="UF" placeholder="EX.: MG" required>
+                            </div>
+                        </div>
+                        <div class="container-salvar">
+                            <button id="btn-salvar-cliente" type="button" onclick="abrirPopUpClientes()">
+                                Salvar
+                            </button>
+                        </div>
+                    </fieldset>
+                </form>
+                
+                <div class="container-clientes-cadastrados">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Telefone</th>
+                                <th>CPF/CNPJ</th>
+                                <th>Rua</th>
+                                <th>CEP</th>
+                                <th>Numero</th>
+                                <th>Cidade</th>
+                                <th>UF</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-clientes">
+                            <!-- prenchimento via javascript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- PopUp de confirmação do cadastro de pedidos -->
+        <div id="popUpClientes" class="popUpClientes">
+            <div class="container-clientes-popUp">
+                <p>Você está prestes a cadastrar um cliente. <strong>Deseja continuar?</strong></p>
+                <button id="close_popUpClientes" class="btn_cancelarClientes" onclick="fecharPopUpClientes()">Cancelar</button>
+                <button id="salvarClientes" class="btn_salvarClientes" type="button">Salvar</button>
+            </div>
+        </div>
+
+    </main>
+    <!-- Carregar jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Carregar jQuery Mask Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="javascript/script.js"></script>
+    <script src="javascript/mascaras.js"></script>
+    <script src="javascript/popUp.js"></script>
+    <script type="module" src="javascript/cadastroClientes.js"></script>
+</body>
+</html>

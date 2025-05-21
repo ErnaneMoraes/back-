@@ -1,0 +1,122 @@
+/* PopUp de confirmações */
+.popUp {
+    display: none; /* Inicia oculto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.popUp-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 500px;
+}
+
+.popUp-container p,
+.container-clientes-popUp p {
+    margin-bottom: 20px;
+}
+
+.btn_cancelar, .btn_salvar,
+.btn_cancelarClientes, .btn_salvarClientes  {
+    width: 100px;
+    margin: 5px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn_cancelar,
+.btn_cancelarClientes {
+    background: red;
+    color: white;
+}
+
+.btn_salvar,
+.btn_salvarClientes {
+    background: #00CF3B;
+    color: white;
+}
+
+
+
+/* estilos pop up exportar relatório */
+/* Estilo para o fundo escurecido */
+
+
+/* Estilo para o fundo escurecido */
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo para o conteúdo da pop-up */
+.popup-content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    top: 50%;
+    left: 50%;
+    gap: 40px;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    height: 50%;
+    width: 80%;
+    text-align: center;
+}
+
+/* Estilo para o botão de fechar */
+.close-btn {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    font-size: 50px;
+    cursor: pointer;
+}
+
+.container-expotar h2 {
+    text-align: left;
+    font-size: 16px;
+}
+
+/*  Tela clientes */
+
+.popUpClientes {
+    display: none;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.container-clientes-popUp {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+}

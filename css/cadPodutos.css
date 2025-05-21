@@ -1,0 +1,48 @@
+/* Estilos específicos */
+
+.container_frm_cadastro fieldset {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+    border: none;
+    padding: 20px;
+}
+
+.container_frm_cadastro .info-produtos {
+    display: flex;
+    gap: 10px;
+}
+
+.campo-cad input[name="tag_produto"],
+.campo-cad input[name="valor_unitario"],
+.campo-cad select[name="medicao"] {
+    width: 200px;
+}
+
+.campo-cad label {
+    font-size: 12px;
+}
+
+.estoque-produtos table {
+    border: 1px solid #ddd;
+}
+
+.estoque {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.btn-estoque {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.btn-estoque button {
+    border: none;
+    width: 100px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+

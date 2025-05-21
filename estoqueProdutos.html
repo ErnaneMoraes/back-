@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../sistema_aralev-master/css/style.css">
+    <link rel="stylesheet" href="../sistema_aralev-master/css/sidebar.css">
+    <link rel="stylesheet" href="../sistema_aralev-master/css/cadPodutos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ysabeau+Infant&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <title>Buscar Pedidos</title>
+</head>
+<body>
+    <!-- Insere a sidebar na página -->
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(html => {
+                document.body.insertAdjacentHTML('afterbegin', html);
+
+                // Agora que a sidebar foi carregada, adicionamos os eventos
+                adicionarEventosSidebar();
+            });
+    </script>
+
+    <main>
+        <header>
+            <div class="cabecalho">
+                <div class="div-oculta"></div>
+                <img src="assets/Logo.png" alt="Logo">
+                <div class="container-modulos">
+                    <img src="assets/Modulos.png" alt="Modulos">
+                    <img src="assets/Notificações.png" alt="Notificações">
+                    <div class="perfil">
+                        <img src="assets/Perfil.png" alt="Foto de Perfil">
+                        <div class="perfil-descricao">
+                            <p>Admin</p>
+                            <p>Desenvolvedor</p>
+                            <div class="submenu">
+                                <a href="#">Configurações</a>
+                                <a href="#" onclick="logout()">Sair</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="secao-indicadores estoque-indicadores">
+            <div class="container-indicadores">
+                <div class="container-navegacao">
+                    <div class="navegacao">
+                        <img src="assets/Home1.png" alt="Home">
+                        <p>Vendas <strong>></strong> Estoque</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- Seção do formulário de cadastro de produtos -->
+        <div class="secao-cadastro">
+            <div class="container_frm_cadastro">
+                <div class="estoque">
+                    <!-- Seção de filtro de buscas dos pedidos -->
+                    <div class="frm_pedidos">
+                        <img src="assets/filtro.png" alt="Ícone de Filtro">
+                        <label for="filtro">Filtrar por: </label>
+                        <select name="filtro" id="coluna-filtro">
+                            <option value="tag">TAG</option>
+                            <option value="nome">Nome</option>
+                            <option value="UF">UF</option>
+                            <option value="cidade">Cidade</option>
+                        </select>
+                        <input type="text" id="buscar_pedidos" name="buscar_pedidos" placeholder="Digite sua busca...">
+                        <button id="btnBuscar">Buscar</button>
+                    </div>
+                    <div class="btn-estoque">
+                        <!-- Botão Excluir -->
+                        <button id="remover" class="btn_remover" type="reset">Excluir</button>
+                    
+                        <!-- Botão Atualizar (passando o ID do produto) -->
+                        <button class="btn_editar" onclick="abrirPopUp('atualizar', 5)">Atualizar</button>
+                    
+                        <!-- Botão Novo -->
+                        <button class="btn_salvar" onclick="abrirPopUp('novo')">Novo</button>
+                    </div>
+                </div>
+                
+                
+                <!-- Tabela de estoque de produtos -->
+                <div class="tabela-container estoque-produtos">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="checkbox-check">
+                                    <input type="checkbox" class="checkbox" id="selecionar-todos">
+                                </th>
+                                <th>
+                                    <h3>ID</h3>
+                                </th>
+                                <th>
+                                    <h3>TAG</h3>
+                                </th>
+                                <th>
+                                    <h3>Nome produto</h3>
+                                </th>
+                                <th>
+                                    <h3>Descrição</h3>
+                                </th>
+                                <th>
+                                    <h3>UN</h3>
+                                </th>
+                                <th>
+                                    <h3>Valor unitário</h3>
+                                </th>
+                                <th>
+                                    <h3>Quantidade</h3>
+                                    
+                                </th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-estoqueProdutos">
+                           <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                           </tr>
+                           <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                           </tr>
+                           <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                           </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                              
+            </div>
+        </div>
+    </main>
+    <script src="javascript/script.js"></script>
+    <script type="module" src="javascript/frontProdutos.js"></script>
+</body>
+</html>

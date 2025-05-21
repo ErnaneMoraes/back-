@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/popUp.css">
+    <link rel="stylesheet" href="css/pedidos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ysabeau+Infant&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <title>Buscar Pedidos</title>
+</head>
+<body>
+    <!-- Insere a sidebar na página -->
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(html => {
+                document.body.insertAdjacentHTML('afterbegin', html);
+
+                // Agora que a sidebar foi carregada, adicionamos os eventos
+                adicionarEventosSidebar();
+            });
+    </script>
+
+    <main>
+        <header>
+            <div class="cabecalho">
+                <div class="div-oculta"></div>
+                <img src="assets/Logo.png" alt="Logo">
+                <div class="container-modulos">
+                    <img src="assets/Modulos.png" alt="Modulos">
+                    <img src="assets/Notificações.png" alt="Notificações">
+                    <div class="perfil">
+                        <img src="assets/Perfil.png" alt="Foto de Perfil">
+                        <div class="perfil-descricao">
+                            <p>Admin</p>
+                            <p>Desenvolvedor</p>
+                            <div class="submenu">
+                                <a href="#">Configurações</a>
+                                <a href="#" onclick="logout()">Sair</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="secao-indicadores estoque-indicadores">
+            <div class="container-indicadores">
+                <div class="container-navegacao">
+                    <div class="navegacao">
+                        <img src="assets/Home1.png" alt="Home">
+                        <p>Vendas <strong>></strong> Pedidos</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- Seção do formulário de cadastro de produtos -->
+        <div class="secao-cadastro">
+            <div class="container_frm_cadastro">
+
+                <!-- Seção de filtro de buscas dos pedidos -->
+                <div class="frm_pedidos">
+                    <img src="assets/filtro.png" alt="Ícone de Filtro">
+                    <label for="filtro">Filtrar por: </label>
+                    <select name="filtro" id="coluna-filtro">
+                        <option value="nome">Nome</option>
+                        <option value="cpf_cnpj">CPF/CNPJ</option>
+                        <option value="UF">UF</option>
+                        <option value="cidade">Cidade</option>
+                    </select>
+                    <input type="text" id="buscar_pedidos" name="buscar_pedidos" placeholder="Digite sua busca...">
+                    <button onclick="abrirPopup()">Exportar Relatório</button>
+                </div>
+                
+                <!-- Tabela de pedidos -->
+                <div class="tabela-container">
+                    <table id="tabelaPrincipal">
+                        <thead>
+                            <tr>
+                                <th class="checkbox-check">
+                                    <input type="checkbox" class="checkbox" id="selecionar-todos">
+                                </th>
+                                <th>
+                                    <h3>ID</h3>
+                                    <!-- <input type="text" name="busca_id"> -->
+                                </th>
+                                <th>
+                                    <h3>Nome</h3>
+                                    <!-- <input type="text" name="busca_nome"> -->
+                                </th>
+                                <th>
+                                    <h3>CPF/CNPJ</h3>
+                                    <!-- <input type="text" name="busca_CPF"> -->
+                                </th>
+                                <th>
+                                    <h3>Celular</h3>
+                                    <!-- <input type="text" name="busca_celular"> -->
+                                </th>
+                                <th>
+                                    <h3>Rua</h3>
+                                    <!-- <input type="text" name="busca_rua"> -->
+                                </th>
+                                <th>
+                                    <h3>Número</h3>
+                                    <!-- <input type="text" name="busca_numero"> -->
+                                </th>
+                                <th>
+                                    <h3>UF</h3>
+                                    <!-- <input type="text" name="busca_uf"> -->
+                                </th>
+                                <th>
+                                    <h3>Cidade</h3>
+                                    <!-- <input type="text" name="busca_cidade"> -->
+                                </th>
+                                <th>
+                                    <h3>Produto</h3>
+                                    <!-- <input type="text" name="busca_produto"> -->
+                                </th>
+                                <th>
+                                    <h3>Quantidade</h3>
+                                    <!-- <input type="text" name="busca_quantidade"> -->
+                                </th>
+                                <th>
+                                    <h3>Desconto</h3>
+                                    <!-- <input type="text" name="busca_desconto"> -->
+                                </th>
+                                <th>
+                                    <h3>Subtotal</h3>
+                                    <!-- <input type="text" name="busca_subtotal"> -->
+                                </th>
+                                <th>
+                                    <h3>Forma PGTO</h3>
+                                    <!-- <input type="text" name="busca_forma_pgto"> -->
+                                </th>
+                                <th>
+                                    <h3>Parcelas</h3>
+                                    <!-- <input type="text" name="busca_parcelas"> -->
+                                </th>
+                                <th>
+                                    <h3>Total</h3>
+                                    <!-- <input type="text" name="busca_total"> -->
+                                </th>
+                                <th>
+                                    <h3>Data Vencimento</h3>
+                                    <!-- <input type="text" name="busca_data_venc"> -->
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-pedidos">
+                           
+                        </tbody>
+                    </table>
+
+                    <!-- Área oculta para exportação -->
+                    <div id="exportarPDF" style="display: none;">
+                        <h2 style="text-align: center; margin-bottom: 20px;">Relatório de Pedidos</h2>
+                        <table id="tabela-exportar" style="width: 100%; border-collapse: collapse;"></table>
+                    </div>
+                </div>       
+                
+                <!-- Estrutura da Pop-up -->
+                <div id="exportPopup" class="popup-overlay">
+                    <div class="popup-content">
+                        <div class="container-expotar">
+                            <span class="close-btn" onclick="fecharPopup()">&times;</span>
+                            <h2>Exportar Relatório</h2>
+                            <img src="assets/filtro.png" alt="Ícone de Filtro">
+                            <label for="filtro">Filtrar por: </label>
+                            <select name="filtro" id="coluna-filtro">
+                                <option value="nome">Nome</option>
+                                <option value="cpf_cnpj">CPF/CNPJ</option>
+                                <option value="UF">UF</option>
+                                <option value="cidade">Cidade</option>
+                            </select>
+                            <select name="filtro-por" id="coluna-filtro">
+                                <option value="e">é</option>
+                                <option value="com">começa com</option>
+                                <option value="igual">é igual a</option>
+                            </select>
+                            <input type="text" id="buscar_pedidos" name="buscar_pedidos" placeholder="Digite sua busca...">
+                        </div>
+                       <div class="export">
+                            <p>Escolha o formato para exportar os dados:</p>
+                            <button onclick="exportarTabela('xlsx')">Exportar como XLSX</button>
+                            <button onclick="exportarTabela('pdf')">Exportar como PDF</button>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+    
+    <script src="javascript/script.js"></script>
+    <script src="javascript/pedidos.js"></script>
+</body>
+</html>

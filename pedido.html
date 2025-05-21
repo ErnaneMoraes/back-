@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pedidos.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/popUp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ysabeau+Infant&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <title>Pedidos</title>
+</head>
+<body>
+    <!-- Insere a sidebar na página -->
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(html => {
+                document.body.insertAdjacentHTML('afterbegin', html);
+                adicionarEventosSidebar();
+            });
+    </script>
+    <main>
+        <header>
+            <div class="cabecalho">
+                <div class="div-oculta"></div>
+                <img src="assets/Logo.png" alt="Logo">
+                <div class="container-modulos">
+                    <img src="assets/Modulos.png" alt="Modulos">
+                    <img src="assets/Notificações.png" alt="Notificações">
+                    <div class="perfil">
+                        <img src="assets/Perfil.png" alt="Foto de Perfil">
+                        <div class="perfil-descricao">
+                            <p>Admin</p>
+                            <p>Desenvolvedor</p>
+                            <div class="submenu">
+                                <a href="#">Configurações</a>
+                                <a href="#" onclick="logout()">Sair</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="secao-indicadores estoque-indicadores">
+            <div class="container-indicadores">
+                <div class="container-navegacao">
+                    <div class="navegacao">
+                        <img src="assets/Home1.png" alt="Home">
+                        <p>Estoque <strong>></strong> Emissão de Pedidos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="secao-cadastro">
+            <div class="container_frm_pedido">
+                <div class="frm_titulo">
+                    <img src="assets/Pedidos.png" alt="Caixa de produtos">
+                    <h1>EMISSÃO DE PEDIDOS</h1>
+                </div>
+                <form id="formPedido">
+                    <fieldset>
+                        <legend>Dados do Cliente</legend>
+                        <div class="linha"></div>
+                        <div class="info-produtos">
+                            <div class="campo-cad tamanho-personalizado">
+                                <label>Nome Completo</label>
+                                <input type="text" name="nome_cliente" placeholder="Digite o nome completo do cliente" required>
+                                <datalist id="clientes-list"></datalist>
+                            </div>
+                            <div class="campo-cad">
+                                <label>Celular</label>
+                                <input type="tel" name="num_celular" placeholder="(xx) x xxxx-xxxx" required>
+                            </div>
+                            <div class="campo-cad">
+                                <label>CPF/CNPJ</label>
+                                <input type="text" name="cpf_ou_cnpj" placeholder="xxx.xxx.xxx-xx" required>
+                            </div>
+                            <div class="campo-cad">
+                                <label>Rua</label>
+                                <input type="text" name="nome_rua" placeholder="Nome da rua" required>
+                            </div>
+                            <div class="campo-cad">
+                                <label>Número</label>
+                                <input type="text" name="numero_casa" placeholder="Ex.: 10" required>
+                            </div>
+                            <div class="campo-cad">
+                                <label>CEP</label>
+                                <input type="text" name="CEP" placeholder="Ex.: 35920-000" required>
+                            </div>
+                            <div class="campo-cad">
+                                <label>Cidade</label>
+                                <input type="text" name="cidade" placeholder="Nome da cidade" required>
+                            </div>
+                            <div class="campo-cad">
+                                <label>UF</label>
+                                <input type="text" name="UF" placeholder="EX.: MG" required>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Produtos</legend>
+                        <div class="linha"></div>
+                        <div id="produtos-container">
+                            <div class="info-produtos">
+                                <div class="campo-cad">
+                                    <label>Produto</label>
+                                    <select name="produto[]" class="select-produto" required>
+                                        <option value="">Carregando produtos...</option>
+                                    </select>
+                                </div>
+                                <div class="campo-cad">
+                                    <label>Quantidade</label>
+                                    <input type="number" name="quantidade[]" placeholder="Ex.: 10 UN" min="1" class="quantidade-produto">
+                                </div>
+                                <div class="campo-cad">
+                                    <label>Desconto</label>
+                                    <input type="text" name="desconto[]" placeholder="Ex.: R$ 5.00,00" class="desconto-produto">
+                                </div>
+                                <div class="campo-cad">
+                                    <label>Subtotal</label>
+                                    <input type="text" name="subtotal[]" placeholder="Ex.: R$ 10.00,00" readonly class="subtotal-produto">
+                                </div>
+                                <div class="container_novo_produto">
+                                    <button type="button" class="add_produto">
+                                        <img src="assets/add_produto.png" alt="Adicionar novo produto" />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Pagamento</legend>
+                        <div class="linha"></div>
+                        <div class="info-produtos">
+                            <div class="campo-cad">
+                                <label>Forma de Pagamento</label>
+                                <select name="forma_pagamento" required>
+                                    <option value="cartao_credito">Cartão de crédito</option>
+                                    <option value="cartao_debito">Cartão de débito</option>
+                                    <option value="dinheiro">Dinheiro</option>
+                                    <option value="pix">Pix</option>
+                                </select>
+                            </div>
+                            <div class="campo-cad">
+                                <label>Parcelas</label>
+                                <input type="number" name="parcelas" placeholder="Ex.: 1x" min="1" required>
+                            </div>
+                            <div class="campo-cad">
+                                <label>Vencimento</label>
+                                <input type="date" name="vencimento" required>
+                            </div>
+                            <div class="campo-cad">
+                                <label>Total</label>
+                                <input type="text" name="total" placeholder="Ex.: R$ 10.00,00" readonly>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="container-enviar-pedido">
+                        <button type="reset" class="btn_cancelar">Cancelar</button>
+                        <button type="button" class="btn_emitir" onclick="validarPedido()">Emitir</button>
+                    </div>
+                </form>
+                <!-- PopUp de confirmação -->
+                <div id="popUp" class="popUp">
+                    <div class="popUp-container">
+                        <p>Você está prestes a emitir um pedido. <strong>Tem certeza que deseja continuar?</strong></p>
+                        <button class="btn_cancelar" onclick="fecharPopUp()">Cancelar</button>
+                        <button class="btn_salvar" onclick="confirmarPedido()">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Carregar jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Carregar jQuery Mask Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="javascript/pedidos.js"></script>
+    <script>
+        // Configuração segura de event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Garante que os elementos existem antes de adicionar eventos
+            const btnEmitir = document.querySelector('.btn_emitir');
+            const btnConfirmar = document.querySelector('#popUp .btn_salvar');
+            
+            if (btnEmitir) {
+                btnEmitir.addEventListener('click', validarPedido);
+            }
+            
+            if (btnConfirmar) {
+                btnConfirmar.addEventListener('click', confirmarPedido);
+            }
+        });
+    </script>
+</body>
+</html>
+
+<!-- TesteLuan -->

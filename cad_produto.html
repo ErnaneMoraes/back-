@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/cadPodutos.css">
+    <link rel="stylesheet" href="css/popUp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ysabeau+Infant&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <title>Cadastro de Produto</title>
+</head>
+<body>
+
+    <!-- Sidebar será carregada aqui -->
+    <div id="sidebar-container"></div>
+    
+    <main>
+        <header>
+            <div class="cabecalho">
+                <div class="div-oculta"></div>
+                <img src="assets/Logo.png" alt="Logo">
+                <div class="container-modulos">
+                    <img src="assets/Modulos.png" alt="Modulos">
+                    <img src="assets/Notificações.png" alt="Notificações">
+                    <div class="perfil">
+                        <img src="assets/Perfil.png" alt="Foto de Perfil">
+                        <div class="perfil-descricao">
+                            <p>Admin</p>
+                            <p>Desenvolvedor</p>
+                            <div class="submenu">
+                                <a href="#">Configurações</a>
+                                <a href="#" onclick="logout()">Sair</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="secao-indicadores estoque-indicadores">
+            <div class="container-indicadores">
+                <div class="container-navegacao">
+                    <div class="navegacao">
+                        <img src="assets/Home1.png" alt="Home">
+                        <p>Estoque <strong>></strong> Cadastro de produtos</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- Seção do formulário de cadastro de produtos -->
+        <div class="secao-cadastro">
+            <div class="container_frm_cadastro">
+                <div class="frm_titulo">
+                    <img src="assets/cad_produtos.png" alt="Caixa de produtos">
+                    <h1>CADASTRO DE PRODUTOS</h1>
+                </div>
+                    <form method="post" onsubmit="return false;">
+                        <fieldset>
+                            <legend>Informações do Produto</legend>
+                            <div class="linha"></div>
+                            <div class="info-produtos cadastro-produtos">
+                                <div class="campo-cad tamanho-personalizado">
+                                    <label>Nome do Produto</label>
+                                    <input type="text" name="nome_produto" placeholder="Digite o nome do produto a cadastrar" required>
+                                </div>
+                                <div class="campo-cad">
+                                    <label>TAG do Produto</label>
+                                    <input type="text" name="tag_produto" placeholder="Ex.: TLH" required>
+                                </div>
+                            </div>
+                            <div class="campo-cad">
+                                <label>Descrição</label>
+                                <textarea type="text" name="desc_produto" placeholder="Dê uma breve descrição do produto" rows="5" ></textarea>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Precificação e Medição</legend>
+                            <div class="linha"></div>
+                            <div class="info-produtos cadastro-produtos">
+                                <div  class="campo-cad tamanho-personalizado">
+                                    <label>Medição</label>
+                                    <select name="medicao">
+                                        <option value="kg">Kilos (Kg)</option>
+                                        <option value="m2">Metros quadrado (m²)</option>
+                                        <option value="gramas">Gramas (g)</option>
+                                    </select>
+                                </div>
+                                <div class="campo-cad">
+                                    <label>Quantidade</label>
+                                    <input type="number" name="quantidade" placeholder="Ex.: 10">
+                                </div>
+                                <div class="campo-cad">
+                                    <label>Valor Unitário (R$)</label>
+                                    <input type="text" name="valor_unitario" placeholder="Ex.: R$ 10.00,00">
+                                </div>
+                                <div class="campo-cad">
+                                    <label>Preço de custo (R$)</label>
+                                    <input type="text" name="preco_custo" placeholder="Ex.: R$ 10.00,00">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="container-enviar-dados">
+                            <button id="cancelar" class="btn_cancelar" type="reset">Cancelar</button>
+                            <!-- Botão que abre o pop-up -->
+                            <button id="abrirPopUp" type="button" class="btn_salvar"  onclick="abrirPopUp()">Salvar</button>
+                            
+                        </div>
+                    </form>
+                <!-- PopUp de confirmação do cadastro de pedidos -->
+                <div id="popUpProduto" class="popUp">
+                    <div class="popUp-container">
+                        <p>Você está prestes a cadastrar um produto. <strong>Tem certeza que deseja cadastrar esse produto?</strong></p>
+                        <button id="close_popUp" class="btn_cancelar" onclick="fecharPopUp()">Cancelar</button>
+                        <!-- Botão dentro do pop-up para confirmar o cadastro -->
+                        <button id="cad_produtos" class="btn_salvar" type="button">Salvar</button> <!-- type="submit" correto -->
+                    </div>
+                </div>
+                              
+            </div>
+        </div>
+    </main>
+    <script src="javascript/script.js"></script>
+    <script src="javascript/popUp.js"></script>
+    <!-- Insere a sidebar na página -->
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(html => {
+                document.body.insertAdjacentHTML('afterbegin', html);
+
+                // Agora que a sidebar foi carregada, adicionamos os eventos
+                adicionarEventosSidebar();
+            });
+    </script>
+</body>
+</html>

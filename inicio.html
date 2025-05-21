@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ysabeau+Infant&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    
+    <title>Página Inicial</title>
+</head>
+<body>
+    <!-- Insere a sidebar na página -->
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(html => {
+                document.body.insertAdjacentHTML('afterbegin', html);
+
+                // Agora que a sidebar foi carregada, adicionamos os eventos
+                adicionarEventosSidebar();
+            });
+    </script>
+    
+    <main>
+        <header>
+            <div class="cabecalho">
+                <div class="div-oculta"></div>
+                <img src="assets/Logo.png" alt="Logo">
+                <div class="container-modulos">
+                    <img src="assets/Modulos.png" alt="Modulos">
+                    <img src="assets/Notificações.png" alt="Notificações">
+                    <div class="perfil">
+                        <img src="assets/Perfil.png" alt="Foto de Perfil">
+                        <div class="perfil-descricao">
+                            <p>Admin</p>
+                            <p>Desenvolvedor</p>
+                            <div class="submenu">
+                                <a href="#">Configurações</a>
+                                <a href="#" onclick="logout()">Sair</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="secao-indicadores">
+            <div class="container-indicadores">
+                <div class="container-navegacao">
+                    <div class="navegacao">
+                        <img src="assets/Home1.png" alt="Home">
+                        <p>Página Principal <strong>></strong> Dashboard</p>
+                    </div>
+                    <nav>
+                        <ul>
+                            <li class="active-date"><a href="#">Hoje</a></li>
+                            <li ><a href="#">7 dias</a></li>
+                            <li><a href="#">30 dias</a></li>
+                            <li><a href="#">90 dias</a></li>
+                            <li><a href="#">Anual</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="indicadores">
+                    <div class="card">
+                        <figure>
+                            <img src="assets/Receita.png" alt="Icone de Receita">
+                            <figcaption>Receita</figcaption>
+                        </figure>
+                        <p>R$ 00,00</p>
+                    </div>
+                    <div class="card">
+                        <figure>
+                            <img src="assets/Vendas.png" alt="Icone de Receita">
+                            <figcaption>Vendas</figcaption>
+                        </figure>
+                        <p>100</p>
+                    </div>
+                    <div class="card">
+                        <figure>
+                            <img src="assets/Pedidos.png" alt="Icone de Receita">
+                            <figcaption>Pedidos</figcaption>
+                        </figure>
+                        <p>1500</p>
+                    </div>
+                    <div class="card">
+                        <figure>
+                            <img src="assets/modulo_indicador.png" alt="Icone de Receita">
+                            <figcaption>Módulos</figcaption>
+                        </figure>
+                        <p>2</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="secao-dashboard">
+            <div class="container-dashboards">
+                <div class="card-dash">
+                    <div></div>
+                    <img src="assets/Edit1.png" alt="Botão edição">
+                </div>
+                <div class="card-dash card2">
+                    <div></div>
+                    <img src="assets/Edit1.png" alt="Botão edição">
+                </div>
+                <div class="card-dash">
+                    <div></div>
+                    <img src="assets/Edit1.png" alt="Botão edição">
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="javascript/script.js"></script>
+    <script src="javascript/inicio.js"></script> 
+    
+</body>
+</html>

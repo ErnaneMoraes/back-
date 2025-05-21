@@ -1,0 +1,288 @@
+:root {
+    --cor-branca: #fff;
+    --cor-secundaria: #4f46e5; /* Exemplo de cor ativa */
+}
+
+/* Seção Sidebar */
+#user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    
+}
+
+#user_avatar {
+    width: 100px; /* Mantém o tamanho normal */
+    height: 100px;
+    object-fit: cover;
+    background-color: #000;
+    border-radius: 100%;
+    transition: transform 0.4s ease-in-out; /* Transição mais fluida */
+}
+
+/* Quando a sidebar estiver fechada, reduz o avatar */
+#sidebar:not(.open-sidebar) #user_avatar {
+   transform: scale(0.4); /* Usa escala ao invés de mudar width/height diretamente */
+}
+
+#sidebar {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    min-height: 100vh;
+    position: relative;
+    transition: all .5s;
+    min-width: 82px;
+    z-index: 2;
+    overflow-y: auto; /* Permite scroll dentro do sidebar se necessário */
+}
+
+#sidebar_content {
+    border-top: 1px solid #ccc;
+}
+
+#config {
+    position: absolute;
+    border-top: 1 px solid #ccc;
+    width: 100%;
+    bottom: 0;
+    border-top: 1px solid #ccc;
+}
+
+#open_btn {
+    margin: 20px auto;
+    width: 60px;
+    height: 60px;
+    border: none;
+    cursor: pointer;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.open-sidebar #open_btn_icon {
+    transform: rotate(90deg);
+}
+#open_btn {
+    transform: rotate(90deg);
+    padding: 10px;
+}
+
+#user_infos span:last-child {
+    color: #6b6b6b;
+    font-size: 12px;
+}
+
+#side-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    list-style: none;
+    width: 100%;
+}
+
+.side-item {
+    padding: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.side-item a.active {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-branca);
+    font-weight: bold;
+}
+
+.side-item ul {
+    width: 100%;
+}
+
+ul li.active {
+    background-color: #4f46e5;
+}
+
+.tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 1000;
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* Destacar a cor de fundo e do texto quando o link estiver ativo */
+.side-item a.active {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-branca);
+    font-weight: bold;
+}
+
+/* Quando o link não estiver ativo, aplicar um efeito de hover */
+.side-item:hover:not(.active),
+#config_btn:hover {
+    background-color: var(--cor-hover);
+    color: var(--cor-branca);
+}
+
+.side-item a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0a0a0a;
+}
+
+
+.side-item a img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    gap: 5px;
+}
+
+.side-item a li img {
+    width: 30px;
+    height: 30px;
+}
+
+
+#config_btn {
+    border: none;
+    width: 100%;
+    font-size: 12px;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    text-align: start;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+/* Descrição dos itens */
+.item-description {
+    width: 0px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    transition: width .6s;
+    height: 0px;
+    text-align: left;
+}
+
+/* Estilo da sidebar aberta */
+#sidebar.open-sidebar {
+    min-width: 17%;
+}
+
+#sidebar.open-sidebar .item-description {
+    width: 150px;
+    height: auto;
+    transition: opacity 0.4s ease-in-out, width 0.4s ease-in-out;
+}
+
+/* Quando a sidebar for aberta, os textos reaparecem gradualmente */
+#sidebar.open-sidebar .item-description {
+    opacity: 1;
+    width: 150px; /* Ajuste conforme necessário */
+}
+
+#sidebar.open-sidebar .side-item a {
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+/* Esconde as subcategorias dentro de Vendas */
+#side-items > li > ul {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, max-height 0.3s ease, visibility 0.3s ease;
+    padding: 10px; /* Ajuste para indentação */
+}
+
+/* Exibe as subcategorias quando o item de "Vendas" for clicado */
+#side-items > li:hover > ul {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    max-height: 400px; /* Ajuste para garantir que todas as subcategorias fiquem visíveis */
+}
+
+/* Estiliza as subcategorias para ficarem organizadas */
+.side-item ul {
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    padding: 5px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo opcional para a subcategoria (se quiser) */
+.side-item ul li {
+    padding: 10px 0px;
+    transition: background-color 0.2s ease;
+    list-style: none;
+}
+
+/* Destaca a subcategoria quando o mouse passa sobre ela */
+.side-item ul li:hover {
+    background-color: var(--cor-hover);
+    border-radius: 4px;
+}
+
+.side-item a .sub-img {
+    width: 20px;
+    height: 20px;
+}
+
+#config {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaçamento entre os botões */
+    align-items: center;
+    padding: 10px;
+}
+
+#logout_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d9534f90; /* Cor vermelha para destacar o logout */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+}
+
+#logout_btn span {
+    font-size: 22px;
+}
+
+#logout_btn img,
+#config img {
+    width: 30px;
+    height: 30px;
+    margin: 0 auto;
+}
+#logout_btn:hover {
+    background-color: #c9302c;
+}
