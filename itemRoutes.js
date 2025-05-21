@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const cors = require('cors');
 const Item = require('./src/models/Item'); 
 const { pool } = require('./database'); // Importação correta
 

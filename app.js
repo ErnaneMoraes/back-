@@ -24,37 +24,20 @@ const PORT = process.env.PORT || 8080;
 // Conexão com o banco de dados
 connectDB();
 
-// CORS manual para garantir funcionamento no Cloud Run
-// const corsOptions = {
-//   origin: '*',
-//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-//   allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token'],
-//   credentials: true,
-// };
+const corsOptions = {
+  origin: 'https://sistemaaraleve.shop',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token'],
+  credentials: true,
+  optionsSuccessStatus: 204 // Alguns navegadores exigem isso para OPTIONS
+};
 
-//app.use(cors(corsOptions));
-//app.options('*', cors(corsOptions));
-
-app.use(cors());
-app.options('*', cors());
+// Aplicar CORS para todas as rotas
+app.use(cors(corsOptions));
 
 //app.options('/usuarios/:id', cors(corsOptions)); Com esse funciona
 app.options('/usuarios/:id'); 
 
-
-
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-//   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, x-access-token");
-//   res.setHeader("Access-Control-Allow-Credentials", "true");
-
-//   if (req.method === "OPTIONS") {
-//     return res.sendStatus(204);
-//   }
-
-//   next();
-// });
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
