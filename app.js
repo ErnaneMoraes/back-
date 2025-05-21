@@ -24,15 +24,25 @@ const PORT = process.env.PORT || 8080;
 // Conexão com o banco de dados
 connectDB();
 
+const allowedOrigins = [
+  'https://sistemaaraleve.shop',
+  'http://localhost:5500' // para desenvolvimento
+];
+
 const corsOptions = {
-  origin: 'https://sistemaaraleve.shop',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token'],
   credentials: true,
-  optionsSuccessStatus: 204 // Alguns navegadores exigem isso para OPTIONS
+  optionsSuccessStatus: 200
 };
 
-// Aplicar CORS para todas as rotas
 app.use(cors(corsOptions));
 
 //app.options('/usuarios/:id', cors(corsOptions)); Com esse funciona
